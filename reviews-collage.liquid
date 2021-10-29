@@ -1,0 +1,91 @@
+{{ 'reviews-collage.css' | asset_url | stylesheet_tag }}
+
+<section class="page-width spaced-section center">
+    <div class="testimonial-header page-width">
+        <h1>{{section.settings.headline}}</h1>
+        <a href="{{section.settings.top-url}}">
+            <button class="testimonial-button">{{section.settings.top-label}}</button>
+        </a>
+    </div>
+<div class="testimonial-container">
+    {% for block in section.blocks %}
+    <div class="testimonial-item">
+        <img src="{{block.settings.image | img_url: 'master'}}"/>
+        <div class="center">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+        </div> 
+        {{block.settings.text}}
+        <h4>{{block.settings.name}}</h4>
+    </div>
+    {% endfor %}
+</div>
+<a href="{{section.settings.bottom-url}}">
+    <button class="button margin-t margin-b">{{section.settings.bottom-label}}</button>
+</a>
+</section>
+
+
+{% schema %}
+{
+    "name":"Custom Testimonials",
+    "settings": [
+    {
+        "type":"text",
+        "id":"headline",
+        "label":"Headline"
+    },
+    {
+        "type":"text",
+        "id":"top-label",
+        "label":"Top button label"
+    },
+    {
+        "type":"url",
+        "id":"top-url",
+        "label":"Top Button label"
+    },
+    {
+        "type":"text",
+        "id":"bottom-label",
+        "label":"Bottom button label"
+    },
+    {
+        "type":"url",
+        "id":"bottom-url",
+        "label":"Bottom Button label"
+    }
+    ],
+    "presets": [
+    {
+        "name":"Custom Testimonials"
+    }
+    ],
+    "blocks": [
+    {
+        "type":"textimonial",
+        "name":"Testimonial",
+        "settings": [
+        {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image"
+        },
+        {
+            "type":"richtext",
+            "id":"text",
+            "label":"Review"
+        },
+        {
+            "type":"text",
+            "id":"name",
+            "label":"Customer name"
+        }
+        ]
+    }
+    ]
+}
+{% endschema %}
